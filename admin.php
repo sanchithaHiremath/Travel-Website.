@@ -1,0 +1,10 @@
+<?php
+session_start();
+$booking = $_SESSION["last_booking"] ?? null;
+?>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Travel Paradise - Admin Dashboard Demo</title><link rel="stylesheet" href="style.css"></head><body>
+<header class="site-header"><a class="brand" href="index.php">✈ Travel Paradise - Admin Dashboard</a><nav><a href="index.php">View Website</a></nav></header>
+<main class="admin-wrap"><section class="admin-welcome"><p class="eyebrow">ADMIN PANEL PREVIEW</p><h1>Welcome to Admin Dashboard!</h1><p>Manage your travel website from a central dashboard. This page is a visual demo and does not include authentication or a database.</p></section>
+<div class="quick-actions"><a class="btn" href="index.php#destinations">View Website</a><a class="btn" href="index.php#destinations">Add Destination (demo)</a><a class="btn" href="booking.php">View Booking Form</a><button class="btn" onclick="window.print()">View Reports / Print</button></div>
+<div class="stats-grid"><article class="stat-card"><span>⌖</span><p>Total Destinations</p><strong>6</strong></article><article class="stat-card"><span>▣</span><p>Total Bookings</p><strong><?= $booking ? "1" : "0" ?></strong></article><article class="stat-card"><span>✉</span><p>Contact Inquiries</p><strong>1</strong></article><article class="stat-card"><span>$</span><p>Total Revenue</p><strong><?= $booking ? "$".number_format($booking["total"],2) : "$0" ?></strong></article></div>
+<section class="booking-panel admin-bookings"><h2>Recent Booking (session demo)</h2><?php if ($booking): ?><p><strong><?= htmlspecialchars($booking["name"]) ?></strong> — <?= htmlspecialchars($booking["destination"]) ?></p><p><?= (int)$booking["people"] ?> traveller(s) · <?= htmlspecialchars($booking["date"]) ?> · $<?= number_format($booking["total"],2) ?></p><?php else: ?><p class="muted">No booking request in this browser session yet. Try the booking form to see a demo entry.</p><?php endif; ?></section></main><footer><a class="brand" href="index.php">Travel Paradise</a><p>Admin dashboard UI demo</p></footer></body></html>
